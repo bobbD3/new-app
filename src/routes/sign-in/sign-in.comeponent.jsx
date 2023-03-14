@@ -1,24 +1,17 @@
-import {signInWithGooglePopup} from '../../utils/firebase/firebase.ultils'
-
+import { signInWithGooglePopup, createUserDocumentFromAuth } from '../../utils/firebase/firebase.ultils'
 
 const SignIn = () => {
-    const logGoogleUser = async () => {
-      const response = await signInWithGooglePopup
+  const logGoogleUser = async () => {
+    const { user } = await signInWithGooglePopup()
+    const userDocRef = await createUserDocumentFromAuth(user)
+  }
 
-      console.log(response)
-    }
-
-
-
-    return ( 
-        <div>
-            <h1>Sign In Page</h1>
-            <button onClick={logGoogleUser}>
-                sign In With Google
-            </button>
-
-        </div>
-    )
+  return (
+    <div>
+      <h1>Sign In Page</h1>
+      <button onClick={logGoogleUser}>sign In With Google</button>
+    </div>
+  )
 }
 
 export default SignIn
